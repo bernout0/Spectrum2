@@ -37,7 +37,7 @@ public class particleScript : MonoBehaviour {
 		_size = _myParticles.GetParticles(_particles);
 		for (int i = 0; i < _size; i++)
 		{
-			_particles[i].size = Mathf.Lerp(_particles[i].size, _musicScript.rms * 6.0f + 0.1f, Time.smoothDeltaTime * 32.0f);
+			_particles[i].size = Mathf.Lerp(_particles[i].size, _musicScript.rms * 10.0f + 0.1f, Time.smoothDeltaTime * 32.0f);
 			_particles[i].velocity = new Vector3(0.0f, _musicScript.rms * 50.0f, 0.0f);
 		}
 		particleMaterial.SetColor("_Color", Color.Lerp(particleMaterial.color, _randomColor, Time.smoothDeltaTime));
