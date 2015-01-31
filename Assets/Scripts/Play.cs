@@ -30,7 +30,11 @@ public class Play : MonoBehaviour {
 	void Update() {
 		RaycastHit hit;
 		bool isLookedAt = GetComponent<Collider>().Raycast(head.Gaze, out hit, Mathf.Infinity);
-		GetComponent<Renderer>().material.color = this.audio.volume == 0 ? Color.black : Color.white;
+		if (isLookedAt) {
+			GetComponent<Renderer>().material.color = Color.blue;
+				}
+		else
+		GetComponent<Renderer>().material.color = this.audio.volume == 0 ? Color.white : Color.red;
 
 		if ((Cardboard.SDK.CardboardTriggered || Input.GetKeyDown ("space"))  && isLookedAt) {
 		if(this.audio.volume == 0)
