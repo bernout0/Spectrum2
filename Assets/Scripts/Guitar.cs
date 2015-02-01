@@ -6,7 +6,8 @@ public class Guitar : MonoBehaviour {
 
 	private CardboardHead head;
 	private Vector3 startingPosition;
-	
+	public Material material1;
+	public Material material2;
 	void Start() {
 		head = Camera.main.GetComponent<StereoController>().Head;
 		startingPosition = transform.localPosition;
@@ -17,7 +18,7 @@ public class Guitar : MonoBehaviour {
 	void Update() {
 		RaycastHit hit;
 		bool isLookedAt = GetComponent<Collider>().Raycast(head.Gaze, out hit, Mathf.Infinity);
-		GetComponent<Renderer>().material.color = isLookedAt == false ? Color.white : Color.red;
+		GetComponent<Renderer>().material = isLookedAt == false ? material1 : material2;
 		
 		if (isLookedAt) {
 			this.audio.volume = 1f;

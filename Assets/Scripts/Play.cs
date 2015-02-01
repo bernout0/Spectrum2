@@ -19,6 +19,8 @@ using System.Collections;
 public class Play : MonoBehaviour {
 	private CardboardHead head;
 	private Vector3 startingPosition;
+	public Material material1;
+	public Material material2;
 	
 	void Start() {
 		head = Camera.main.GetComponent<StereoController>().Head;
@@ -34,13 +36,29 @@ public class Play : MonoBehaviour {
 			GetComponent<Renderer>().material.color = Color.blue;
 				}
 		else
-		GetComponent<Renderer>().material.color = this.audio.volume == 0 ? Color.white : Color.red;
+		GetComponent<Renderer>().material = isLookedAt == false ? material1 : material2;
 
 		if ((Cardboard.SDK.CardboardTriggered || Input.GetKeyDown ("space"))  && isLookedAt) {
 		if(this.audio.volume == 0)
+			{
 				this.audio.volume = Mathf.Lerp(0f, 1f , 1f);
+
+				transform.localScale = Vector3.Lerp(transform.localScale, 
+				                                    new Vector3(gameObject.transform.localScale.x/2, 
+				                                            gameObject.transform.localScale.y/2
+				            , gameObject.transform.localScale.z/2), 10f);
+
+				//collider.size = new Vector3(collider.size.x, ySize, collider.size.z);
+			}
 		else if(this.audio.volume != 0)
+			{
 				this.audio.volume = Mathf.Lerp(1f, 0f , 1f);
+
+				transform.localScale = Vector3.Lerp(transform.localScale, 
+				                                    new Vector3(gameObject.transform.localScale.x*2, 
+				            gameObject.transform.localScale.y*2
+				            , gameObject.transform.localScale.z*2), 10f);
+			}
 		}
 	}
 	
